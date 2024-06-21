@@ -28,10 +28,10 @@ CREATE TABLE `topics` (
 CREATE TABLE `studymaterial` (
   `sid` int(11) NOT NULL AUTO_INCREMENT,
   `tid` int(11) NOT NULL,
-  `description` TEXT,
+  `image` MEDIUMBLOB NOT NULL,
   `material` VARCHAR(255),
-  PRIMARY KEY(sid),
-  FOREIGN KEY (tid) REFERENCES topics(tid)
+  PRIMARY KEY(`sid`),
+  FOREIGN KEY (`tid`) REFERENCES `topics`(`tid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --PracticeQuestions
@@ -44,25 +44,5 @@ CREATE TABLE `practicequestions` (
   FOREIGN KEY (tid) REFERENCES topics(tid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---Quizzes
-CREATE TABLE `quizzes` (
-   quizid INT PRIMARY KEY AUTO_INCREMENT
-       tid INT,
-       quiz VARCHAR(255),
-
-       FOREIGN KEY (tid) REFERENCES Topics(tid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- quiz Questions Table 
-CREATE TABLE `quiz_questions` (
-   id INT PRIMARY KEY AUTO_INCREMENT,
-   quiz_id INT,
-   option_a VARCHAR(255),
-   option_b VARCHAR(255),
-   option_c VARCHAR(255),
-   option_d VARCHAR(255),
-   correct_answer VARCHAR(1),
-   FOREIGN KEY (quiz_id) REFERENCES `quizzes`(quizid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

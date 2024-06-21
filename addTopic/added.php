@@ -1,8 +1,7 @@
 <?php 
     require_once('../helpers/init.php');
-
-    print "<pre>";
-    print_r($_POST);
+    // print "<pre>";
+    // print_r($_POST);
 
     $topicName = "";
 

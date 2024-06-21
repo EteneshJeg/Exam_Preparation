@@ -1,0 +1,36 @@
+ .portfolio-content {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-content img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .portfolio-content .portfolio-info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: white;
+        }
+
+        .portfolio-content .link-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-content:hover .link-icon {
+            opacity: 1;
+        }
+
+        .portfolio-content:hover img {
+            opacity: 0.7;
+        }

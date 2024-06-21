@@ -1,6 +1,5 @@
 <?php
-
-require_once("init.php");
+require_once("../helpers/init.php");
 
 //clean up
 
@@ -12,6 +11,7 @@ function cleanUp($data)
 
   return $data;
 }
+
 
 //Register function
 function registerUser($fname, $lname, $email, $password, $role)
@@ -32,7 +32,7 @@ function registerUser($fname, $lname, $email, $password, $role)
 
   return $result; // Return true on success, false on failure
 }
-// Login 
+// Login
 
 // check if user name and password is correct 
 
@@ -95,9 +95,9 @@ function addTopic($topic)
 
   //Handle if there is error 
   if ($query) {
-    //If there is anything you want to do after the user is registered
-  } else {
-    //Handle  error here 
+    echo "Topic added successfully."; 
+    } else {
+    echo "Error occurred while adding study material: " . mysqli_error($link);
   }
 }
 
@@ -162,38 +162,47 @@ function generateLink($category, $topicId)
   // Define unique page URLs based on category and topic ID
   switch ($category) {
     case 'Study Material':
-      return './StudyMaterial' . $topicId . '.php';
+      return './StudyMaterial/StudyMaterial' . $topicId . '.php';
     case 'Practice Questions':
-      return 'PracticeQuestions' . $topicId . '.php';
+      return 'PracticeQuestions/PracticeQuestions' . $topicId . '.php';
     case 'Quizzes':
-      return 'Quiz2/index' . $topicId . '.html';
+      return 'quiz' . $topicId . '.php';
     default:
       return '#';
   }
 }
 
-//add study material
-
-function addStudyMaterial($description, $materialUrl, $topic)
+//add study material function
+function addStudyMaterial($image, $materialUrl, $topic)
 {
   global $link;
+  $msg = "";
 
-  $description = cleanUp($description);
+
+  // $image = cleanUp($image);
   $topic = cleanUp($topic);
 
-  $query_text = "INSERT INTO studymaterial (tid, description, material) VALUES (?, ?, ?)";
-  $query = mysqli_prepare($link, $query_text);
-  mysqli_stmt_bind_param($query, 'iss', $topic, $description, $materialUrl);
+  $query_text = "INSERT INTO studymaterial (tid, image, material) VALUES (?, ?, ?)";
+  $query = mysqli_prepare($link,
+    $query_text
+  );
+  mysqli_stmt_bind_param($query,
+    'iss',
+    $topic,
+    $image,
+    $materialUrl
+  );
   mysqli_stmt_execute($query);
 
   if (mysqli_stmt_affected_rows($query) > 0) {
     echo "Study material added successfully.";
-  } else {
+  } else if (mysqli_stmt_affected_rows($query) == 0) {
     echo "Failed to add study material.";
+  } else {
+    echo "Error occurred while adding study material: " . mysqli_error($link);
   }
+
 }
-
-
 //add practice questions
 
 function addPracticeQuestion($question, $answer, $topic)
@@ -222,27 +231,33 @@ function addPracticeQuestion($question, $answer, $topic)
 
 
 // add Quiz 
-
-function addQuiz($quiz, $topic)
+function addQuiz($question, $options, $correctAns, $topic)
 {
   global $link;
 
-  $quiz = cleanUp($quiz);
+  // Clean up inputs
+  $question = cleanUp($question);
   $topic = cleanUp($topic);
+  $correctAns = cleanUp($correctAns);
 
-  $query_text = "INSERT INTO quizzes (tid, quiz) VALUES (?, ?)";
+  // Implode options array into a string with '|' delimiter
+  $optionsString = implode('|', array_map('cleanUp', $options));
+
+  // Prepare the SQL query
+  $query_text = "INSERT INTO quizquestions (tid, question, options, correctAnswer) VALUES (?, ?, ?, ?)";
   $query = mysqli_prepare($link, $query_text);
-  mysqli_stmt_bind_param($query, 'is', $topic, $quiz);
-  mysqli_stmt_execute($query);
 
-  $affectedRows = mysqli_stmt_affected_rows($query);
-  if (
-    $affectedRows > 0
-  ) {
+  // Bind parameters and execute query
+  mysqli_stmt_bind_param($query, 'isss', $topic, $question, $optionsString, $correctAns);
+  $result = mysqli_stmt_execute($query);
+
+  // Check if the query was successful
+  if ($result) {
     echo "Quiz added successfully.";
-  } elseif ($affectedRows === 0) {
-    echo "Failed to add quiz.";
   } else {
-    echo "Error occurred while adding quiz: " . mysqli_error($link);
+    echo "Failed to add quiz: " . mysqli_error($link);
   }
+
+  // Close the statement
+  mysqli_stmt_close($query);
 }
