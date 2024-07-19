@@ -176,33 +176,28 @@ function generateLink($category, $topicId)
 function addStudyMaterial($image, $materialUrl, $topic)
 {
   global $link;
-  $msg = "";
 
-
-  // $image = cleanUp($image);
+  $image = cleanUp($image);
+  $materialUrl = cleanUp($materialUrl);
   $topic = cleanUp($topic);
 
-  $query_text = "INSERT INTO studymaterial (tid, image, material) VALUES (?, ?, ?)";
-  $query = mysqli_prepare($link,
-    $query_text
-  );
-  mysqli_stmt_bind_param($query,
-    'iss',
-    $topic,
-    $image,
-    $materialUrl
-  );
+  $query_text = "INSERT INTO studymaterial (image, material, tid) VALUES (?, ?, ?)";
+  $query = mysqli_prepare($link, $query_text);
+  mysqli_stmt_bind_param($query, 'ssi', $image, $materialUrl, $topic);
   mysqli_stmt_execute($query);
 
-  if (mysqli_stmt_affected_rows($query) > 0) {
-    echo "Study material added successfully.";
-  } else if (mysqli_stmt_affected_rows($query) == 0) {
-    echo "Failed to add study material.";
+  $affectedRows = mysqli_stmt_affected_rows($query);
+  if ($affectedRows > 0) {
+    echo "<h3>Study material added successfully.</h3>";
+  } elseif ($affectedRows === 0) {
+    echo "<h3>Failed to add study material.</h3>";
   } else {
-    echo "Error occurred while adding study material: " . mysqli_error($link);
+    echo "<h3>Error occurred while adding study material: </h3>" . mysqli_error($link);
   }
 
+  mysqli_stmt_close($query);
 }
+
 //add practice questions
 
 function addPracticeQuestion($question, $answer, $topic)
@@ -220,15 +215,13 @@ function addPracticeQuestion($question, $answer, $topic)
 
   $affectedRows = mysqli_stmt_affected_rows($query);
   if ($affectedRows > 0) {
-    echo "Practice question added successfully.";
+    echo "<h3>Practice question added successfully.</h3>";
   } elseif ($affectedRows === 0) {
-    echo "Failed to add practice question.";
+    echo "<h3>Failed to add practice question.</h3>";
   } else {
-    echo "Error occurred while adding practice question: " . mysqli_error($link);
+    echo "<h3>Error occurred while adding practice question:</h3> " . mysqli_error($link);
   }
 }
-
-
 
 // add Quiz 
 function addQuiz($question, $options, $correctAns, $topic)

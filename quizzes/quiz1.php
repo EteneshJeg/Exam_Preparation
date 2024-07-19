@@ -10,7 +10,7 @@ $result = mysqli_query($link, $query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCQ Quiz</title>
+    <title>html Quiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -131,13 +131,13 @@ $result = mysqli_query($link, $query);
 
 <body>
     <div>
-        <div style="display: inline;"> <a class="navbar-brand" style="color: #E76F40; margin:40px;" href="../FrontendExam/home/home.html">/<span>Home</span></a></div>
+        <div> <a class="navbar-brand" style="color: #E76F40; margin:40px;" href="../FrontendExam/home/home.html">/<span>Home</span></a> </div>
         <section id="faq" class="faq section">
-            <div class="container section-title" data-aos="fade-up">
-                <h2>HTML MCQ Quiz</h2>
-            </div>
             <div class="container">
                 <div class="row">
+                    <div class="container section-title mb-2" data-aos="fade-up">
+                        <h2>HTML Quiz</h2>
+                    </div>
                     <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                         <div class="faq-container">
                             <form action="./submit_quiz.php" method="post" id="quiz-form">
@@ -160,10 +160,10 @@ $result = mysqli_query($link, $query);
                                 <?php $i++;
                                 endwhile; ?>
                                 <div class="navigation-buttons">
-                                    <button type="button" id="prev-btn" onclick="navigateQuestion(-1)" disabled>Previous</button>
-                                    <button type="button" id="next-btn" onclick="navigateQuestion(1)">Next</button>
+                                    <button type="button" id="prev-btn" onclick="navigateQuestion(-1)" class="btn custom-btn smoothscroll me-3mb-3" disabled>Previous</button>
+                                    <button type="button" id="next-btn" onclick="navigateQuestion(1)" class="btn custom-btn smoothscroll me-3">Next</button>
                                 </div>
-                                <button type="submit" id="submit-btn" style="display:none;">Submit</button>
+                                <button type="submit" id="submit-btn" style="display:none;" class="btn custom-btn smoothscroll me-3">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -172,12 +172,7 @@ $result = mysqli_query($link, $query);
         </section>
     </div>
 
-
-
     <script>
-        let currentQuestionIndex = 0;
-        const questions = document.querySelectorAll('.faq-item');
-
         function selectOption(button, inputName) {
             const parent = button.closest('.faq-item');
             const correctAnswer = parent.getAttribute('data-correct-answer');
@@ -201,6 +196,9 @@ $result = mysqli_query($link, $query);
             hiddenInput.value = button.getAttribute('data-value');
         }
 
+        let currentQuestionIndex = 0;
+        const questions = document.querySelectorAll('.faq-item');
+
         function navigateQuestion(direction) {
             // Hide current question
             questions[currentQuestionIndex].style.display = 'none';
@@ -209,15 +207,15 @@ $result = mysqli_query($link, $query);
             currentQuestionIndex += direction;
 
             // Show next/previous question
-            questions[currentQuestionIndex].style.display = 'block';
+            questions[currentQuestionIndex].style.display = 'inline';
 
             // Handle navigation buttons
             document.getElementById('prev-btn').disabled = currentQuestionIndex <= 0;
             if (currentQuestionIndex === questions.length - 1) {
                 document.getElementById('next-btn').style.display = 'none';
-                document.getElementById('submit-btn').style.display = 'block';
+                document.getElementById('submit-btn').style.display = 'inline';
             } else {
-                document.getElementById('next-btn').style.display = 'block';
+                document.getElementById('next-btn').style.display = 'inline';
                 document.getElementById('submit-btn').style.display = 'none';
             }
         }

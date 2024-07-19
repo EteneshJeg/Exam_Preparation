@@ -52,7 +52,7 @@ if (isset($_POST['logout'])) {
 
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link href=".css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <link href="./css/bootstrap-icons.css" rel="stylesheet">
 
@@ -134,7 +134,7 @@ if (isset($_POST['logout'])) {
             <div class="row">
 
                 <div class="col-lg-6 col-12">
-                    <img src="./FrontendExam/images/about.png" class="img-fluid" alt="">
+                    <img src="./images/about.png" class="img-fluid" alt="">
                 </div>
 
                 <div class="col-lg-6 col-12">
@@ -160,24 +160,54 @@ if (isset($_POST['logout'])) {
             </div>
         </div>
     </section>
-
     <section class="contact-section section-padding" id="section_3">
         <div class="container">
             <div class="row">
+                <div class="col-lg-5 col-12 mx-auto">
+                    <form class="custom-form ebook-download-form bg-white shadow" action="https://formspree.io/f/maygbloq" method="POST" role="form">
+                        <div class="text-center mb-5">
+                            <h2 class="mb-1">Contact Us</h2>
+                        </div>
 
-                <div class="col-lg-5 col-12 mx-auto pt-1">
-                    <h6 class="mt-5">Say hi and talk to us</h6>
+                        <div class="ebook-download-form-body">
+                            <div class="input-group mb-4">
+                                <input type="text" name="ebook-form-name" id="ebook-form-name" class="form-control" aria-label="ebook-form-name" aria-describedby="basic-addon1" placeholder="Your Full Name" required>
 
-                    <h2 class="mb-4">Contact Us</h2>
-                    <p class="mb-3">
-                        <i class="bi-geo-alt me-2"></i>
-                        Ethiopia,Addis Ababa
-                    </p>
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="custom-form-icon bi-person"></i>
+                                </span>
+                            </div>
+
+                            <div class="input-group mb-4">
+                                <input type="email" name="ebook-form-email" id="ebook-form-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Your email" required="">
+
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="custom-form-icon bi-envelope"></i>
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Your message:
+                                    <textarea name="message" class="form-control"></textarea>
+                                </label>
+                            </div>
+
+                            <div class="col-lg-8 col-md-10 col-8 mx-auto">
+                                <button type="submit" class="custom-btn">Send</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="col-lg-6 col-12">
+                <div class=" col-lg-6 col-12">
+                    <h6 class="mt-5">Say hi and talk to us</h6>
 
+                    <h2 class="mb-4">Contact</h2>
 
+                    <p class="mb-3">
+                        <i class="bi-geo-alt me-2"></i>
+                        Ethiopia, Addis Ababa
+                    </p>
                     <h6>Phone Number</h6>
 
                     <p class="mb-2">
@@ -185,11 +215,10 @@ if (isset($_POST['logout'])) {
                             +251-934929292
                         </a>
                     </p>
-                    <h6>Our email</h6>
 
                     <p>
                         <a href="mailto:info@company.com" class="contact-link">
-                            examPreparation@gmail.com
+                            examprep@gmail.com
                         </a>
                     </p>
 
@@ -197,11 +226,14 @@ if (isset($_POST['logout'])) {
 
                     <ul class="social-icon mb-4">
                         <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram"></a>
+                            <a href="https://github.com/EteneshJeg/ExamPreparation" class="social-icon-link bi-github"></a>
+                        </li>
+                        <li class="social-icon-item">
+                            <a href="linkedin.com/in/etenesh-gishamo-1b13a2272" class="social-icon-link bi-linkedin"></a>
                         </li>
 
                         <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-facebook"></a>
+                            <a href="https://www.facebook.com/" class="social-icon-link bi-facebook"></a>
                         </li>
 
                         <li class="social-icon-item">
@@ -209,20 +241,24 @@ if (isset($_POST['logout'])) {
                         </li>
                     </ul>
 
-                    <p class="copyright-text">Copyright © 2024 examPrep
+                    <p class="copyright-text">Copyright © 2024 examprep
+                        <br><br><a rel="nofollow" href="https://templatemo.com" target="_blank">designed by examprep members!</a>
+                    </p>
                 </div>
 
             </div>
         </div>
     </section>
+
+
     </main>
 
     <!-- JAVASCRIPT FILES -->
-    <script src="./FrontendExam/js/jquery.min.js"></script>
-    <script src="./FrontendExam/js/bootstrap.bundle.min.js"></script>
-    <script src="./FrontendExam/js/jquery.sticky.js"></script>
-    <script src="./FrontendExam/js/click-scroll.js"></script>
-    <script src="./FrontendExam/js/custom.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/jquery.sticky.js"></script>
+    <script src="./js/click-scroll.js"></script>
+    <script src="./js/custom.js"></script>
 
 </body>
 

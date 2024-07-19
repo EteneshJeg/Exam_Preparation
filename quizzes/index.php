@@ -5,9 +5,9 @@ $topics = getTopics();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Print the POST array for debugging
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($_POST);
+    // echo '</pre>';
     $topic = isset($_POST['topic']) ? $_POST['topic'] : '';
     $question = isset($_POST['question']) ? $_POST['question'] : '';
     $options = isset($_POST['options']) ? $_POST['options'] : [];
@@ -31,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,10 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Quizzes</title>
-    <!-- Bootstrap CSS -->
+    <!-- CSS FILES -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

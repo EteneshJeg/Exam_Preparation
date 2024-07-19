@@ -10,7 +10,7 @@ $result = mysqli_query($link, $query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCQ Quiz</title>
+    <title>css Quiz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -130,45 +130,50 @@ $result = mysqli_query($link, $query);
 </head>
 
 <body>
-    <div style="display: inline;"> <a class="navbar-brand" style="color: #E76F40; margin:40px;" href="../FrontendExam/home/home.html">/<span>Home</span></a></div>
-    <section id="faq" class="faq section">
-        <div class="container section-title" data-aos="fade-up">
-            <h2>css MCQ Quiz</h2>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-                    <div class="faq-container">
-                        <form action="submit_quiz.php" method="post" id="quiz-form">
-                            <?php $i = 0;
-                            while ($row = mysqli_fetch_assoc($result)) : ?>
-                                <div class="faq-item" data-correct-answer="<?php echo $row['correctAnswer']; ?>" data-index="<?php echo $i; ?>" style="<?php echo $i > 0 ? 'display:none;' : ''; ?>">
-                                    <h3><?php echo $row['question']; ?></h3>
-                                    <div class="faq-content">
-                                        <?php
-                                        $options = explode('|', $row['options']);
-                                        foreach ($options as $option) :
-                                        ?>
-                                            <button type="button" class="option-button" data-value="<?php echo $option; ?>" onclick="selectOption(this, 'question_<?php echo $row['qid']; ?>')">
-                                                <?php echo $option; ?>
-                                            </button>
-                                        <?php endforeach; ?>
-                                        <input type="hidden" name="question_<?php echo $row['qid']; ?>" value="">
+    <div>
+        <div> <a class="navbar-brand" style="color: #E76F40; margin:40px;" href="../FrontendExam/home/home.html">/<span>Home</span></a> </div>
+        <section id="faq" class="faq section">
+            <div class="container">
+                <div class="row">
+                    <div class="container section-title mb-2" data-aos="fade-up">
+                        <h2>CSs Quiz</h2>
+                    </div>
+                    <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                        <div class="faq-container">
+                            <form action="./submit_quiz.php" method="post" id="quiz-form">
+                                <?php $i = 0;
+                                while ($row = mysqli_fetch_assoc($result)) : ?>
+                                    <div class="faq-item" data-correct-answer="<?php echo $row['correctAnswer']; ?>" data-index="<?php echo $i; ?>" style="<?php echo $i > 0 ? 'display:none;' : ''; ?>">
+                                        <h3><?php echo $row['question']; ?></h3>
+                                        <div class="faq-content">
+                                            <?php
+                                            $options = explode('|', $row['options']);
+                                            foreach ($options as $option) :
+                                            ?>
+                                                <button type="button" class="option-button" data-value="<?php echo $option; ?>" onclick="selectOption(this, 'question_<?php echo $row['qid']; ?>')">
+                                                    <?php echo $option; ?>
+                                                </button>
+                                            <?php endforeach; ?>
+                                            <input type="hidden" name="question_<?php echo $row['qid']; ?>" value="">
+                                        </div>
                                     </div>
+                                <?php $i++;
+                                endwhile; ?>
+                                <div class="navigation-buttons">
+                                    <button type="button" id="prev-btn" onclick="navigateQuestion(-1)" class="btn custom-btn smoothscroll me-3mb-3" disabled>Previous</button>
+                                    <button type="button" id="next-btn" onclick="navigateQuestion(1)" class="btn custom-btn smoothscroll me-3">Next</button>
                                 </div>
-                            <?php $i++;
-                            endwhile; ?>
-                            <div class="navigation-buttons">
-                                <button type="button" id="prev-btn" onclick="navigateQuestion(-1)" disabled>Previous</button>
-                                <button type="button" id="next-btn" onclick="navigateQuestion(1)">Next</button>
-                            </div>
-                            <button type="submit" id="submit-btn" style="display:none;">Submit</button>
-                        </form>
+                                <button type="submit" id="submit-btn" style="display:none;" class="btn custom-btn smoothscroll me-3">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
+
+
 
     <script>
         let currentQuestionIndex = 0;
@@ -193,7 +198,7 @@ $result = mysqli_query($link, $query);
             }
 
             // Update the hidden input value
-            const hiddenInput = parent.querySelector(input[name = "${inputName}"]);
+            const hiddenInput = parent.querySelector(`input[name="${inputName}"]`);
             hiddenInput.value = button.getAttribute('data-value');
         }
 
@@ -205,15 +210,15 @@ $result = mysqli_query($link, $query);
             currentQuestionIndex += direction;
 
             // Show next/previous question
-            questions[currentQuestionIndex].style.display = 'block';
+            questions[currentQuestionIndex].style.display = 'inline';
 
             // Handle navigation buttons
-            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+            document.getElementById('prev-btn').disabled = currentQuestionIndex <= 0;
             if (currentQuestionIndex === questions.length - 1) {
                 document.getElementById('next-btn').style.display = 'none';
-                document.getElementById('submit-btn').style.display = 'block';
+                document.getElementById('submit-btn').style.display = 'inline';
             } else {
-                document.getElementById('next-btn').style.display = 'block';
+                document.getElementById('next-btn').style.display = 'inline';
                 document.getElementById('submit-btn').style.display = 'none';
             }
         }
